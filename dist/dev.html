@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="/app_static/bundle.css">
+	<script defer src="/app_static/bundle.js"></script>
+	
+	<!-- Injected For Live Reloading -->
+	<script>
+		const ws = new WebSocket("wss://" + window.location.hostname);
+		let linkTag = document.head.querySelector("link");
+		let scriptTag = document.head.querySelector("script");
+		
+		ws.addEventListener("message", (event) => {
+    	if (event.data === "change") {
+
+				scriptTag.remove();
+				scriptTag = document.createElement("script");
+				scriptTag.src = "/app_static/bundle.js?t=" + Date.now();
+				document.head.appendChild(scriptTag);
+				
+				linkTag.href = "/app_static/bundle.css?t=" + Date.now();
+			}
+		});
+	</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,6 @@
+run = "node index.js"
+
+hidden = [ ".config", "dist", "build.js" ]
+
+[nix]
+channel = "stable-21_11"
